@@ -7,11 +7,9 @@ RUN mkdir -p /usr/local/tomcat/.OpenMRS \
     && unzip -d /tmp/ /tmp/refapp-addons.zip \
     && cp -r /tmp/referenceapplication-package-2.8.1/* /usr/local/tomcat/.OpenMRS/ \
     && rm /tmp/refapp-addons.zip \
-    && rm -rf /tmp/referenceapplication-package-2.8.1/ \
-    && sed -i '/Connector port="8080"/a URIEncoding="UTF-8" relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"' /usr/local/tomcat/conf/server.xml
+    && rm -rf /tmp/referenceapplication-package-2.8.1/ 
 
 COPY startup.sh /usr/local/tomcat/startup.sh
 COPY setenv.sh /usr/local/tomcat/bin/setenv.sh
 
-# Run tomcat
-CMD /usr/local/tomcat/startup.sh
+ENTRYPOINT [ "/usr/local/tomcat/startup.sh" ]

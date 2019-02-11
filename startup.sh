@@ -1,4 +1,4 @@
-#!/bin/bash -eux
+#!/bin/bash
 # Modified from https://github.com/openmrs/openmrs-sdk/
 
 # For runtime-setup actions only (i.e. actions that require access to runtime environment variables). 
@@ -23,28 +23,23 @@ admin_user_password=${OPENMRS_ADMIN_PASSWORD}
 EOF
 
 # Stall until DB becomes available
-
-# echo "[STARTUP.sh] Waiting for DB to become available..."
-# while :
-#     do
-#         (echo > /dev/tcp/${DB_HOST}/3306) >/dev/null 2>&1
-#         result=$?
-#         if [[ $result -eq 0 ]]; then
-#             echo "[STARTUP.sh] Verified DB availability"
-#             break
-#         fi
-#         sleep 1
-#     done
-
-sleep 10
+while true
+do
+    (echo > /dev/tcp/${DB_HOST}/3306) >/dev/null 2>&1
+    result=$?
+    if [[ $result -eq 0 ]]; then
+        break
+    fi
+    sleep 1
+done
 
 # Start tomcat in background
-/usr/local/tomcat/bin/catalina.sh run
+/usr/local/tomcat/bin/catalina.sh run &
 
-# # trigger first filter to start data importation
-# sleep 15
-# curl -L http://localhost:8080/openmrs/ > /dev/null
-# sleep 15
+# trigger first filter to start data importation
+sleep 15
+curl -L http://localhost:8080/openmrs/ > /dev/null
+sleep 15
 
-# # bring tomcat process to foreground again
-# wait ${!}
+# bring tomcat process to foreground again
+wait ${!}
