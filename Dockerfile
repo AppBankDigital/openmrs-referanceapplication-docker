@@ -9,5 +9,7 @@ RUN mkdir -p /usr/local/tomcat/.OpenMRS \
     && rm /tmp/refapp-addons.zip \
     && rm -rf /tmp/referenceapplication-package-2.8.1/
 
+COPY startup.sh /usr/local/tomcat/startup.sh
+
 # Run tomcat
-#CMD /usr/local/tomcat/startup.sh
+CMD /usr/local/tomcat/startup.sh
