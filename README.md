@@ -22,7 +22,7 @@ services:
   refapp:
     depends_on:
       - db
-    image: isears/openmrs-referenceapplication:latest
+    image: isears/openmrs-referenceapplication-docker:latest
     links:
       - db:database
     ports:
