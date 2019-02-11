@@ -24,6 +24,7 @@ services:
       DB_USERNAME: "root"
       DB_PASSWORD: "password"
       DB_CREATE_TABLES: "true"
+      DB_AUTO_UPDATE: "false"
       MODULE_WEB_ADMIN: "false"
-      OPENMRS_ADMIN_PASSWORD: "Admin123"
+      OPENMRS_ADMIN_PASSWORD: "MyCustomPassword123" # Note: has no effect if DB_CREATE_TABLES set to false
       TZ: "America/New_York"

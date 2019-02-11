@@ -11,6 +11,7 @@ RUN mkdir -p /usr/local/tomcat/.OpenMRS \
     && sed -i '/Connector port="8080"/a URIEncoding="UTF-8" relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"' /usr/local/tomcat/conf/server.xml
 
 COPY startup.sh /usr/local/tomcat/startup.sh
+COPY setenv.sh /usr/local/tomcat/bin/setenv.sh
 
 # Run tomcat
 CMD /usr/local/tomcat/startup.sh
