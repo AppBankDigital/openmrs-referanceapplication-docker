@@ -1,3 +1,5 @@
 # OpenMRS Reference Application Production Docker Images
 
-TODO description
+PROJECT STILL UNDER CONSTRUCTION
+
+COME BACK LATER
