@@ -10,7 +10,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "password"
       MYSQL_DATABASE: "openmrs"
-
+    volumes:
+      - safehands-database:/var/lib/mysql
+    restart: unless-stopped 
   refapp:
     depends_on:
       - db
@@ -29,6 +31,14 @@ services:
       MODULE_WEB_ADMIN: "false"
       OPENMRS_ADMIN_PASSWORD: "Safehands@123" # Note: has no effect if DB_CREATE_TABLES set to false
       TZ: "America/Chicago"
+    volumes:
+      - document-upload:/usr/local/tomcat/.OpenMRS/Document
+    restart: unless-stopped
+
+volumes:
+  safehands-database:
+  document-upload:
+ 
 networks:
  default:
   external:
