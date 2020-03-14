@@ -1,5 +1,6 @@
 FROM tomcat:7-jre8
-
+#set timezone
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Install openmrs.war and refapp addons
 RUN mkdir -p /usr/local/tomcat/.OpenMRS \
     && wget --quiet https://sourceforge.net/projects/openmrs/files/releases/OpenMRS_Reference_Application_2.9.0/openmrs.war/download -O /usr/local/tomcat/webapps/openmrs.war \

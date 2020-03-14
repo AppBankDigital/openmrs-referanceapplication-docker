@@ -26,11 +26,11 @@ services:
       DB_DATABASE: "openmrs"
       DB_USERNAME: "root"
       DB_PASSWORD: "password"
-      DB_CREATE_TABLES: "false"
+      DB_CREATE_TABLES: "true"
       DB_AUTO_UPDATE: "false"
       MODULE_WEB_ADMIN: "false"
       OPENMRS_ADMIN_PASSWORD: "Safehands@123" # Note: has no effect if DB_CREATE_TABLES set to false
-      TZ: "America/Chicago"
+      TZ: "Asia/Kolkata"
     volumes:
       - document-upload:/usr/local/tomcat/.OpenMRS/Document
     restart: unless-stopped
