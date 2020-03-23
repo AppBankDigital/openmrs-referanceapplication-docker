@@ -16,8 +16,8 @@ connection.username=${DB_USERNAME}
 connection.password=${DB_PASSWORD}
 has_current_openmrs_database=true
 create_database_user=false
-module_web_admin=false
-create_tables=true
+module.allow_web_admin=${MODULE_WEB_ADMIN}
+create_tables=${DB_CREATE_TABLES}
 auto_update_database=false
 admin_user_password=${OPENMRS_ADMIN_PASSWORD}
 EOF
