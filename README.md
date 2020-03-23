@@ -41,6 +41,8 @@ services:
 
 Then run `docker-compose up` in the same directory.
 
+Downloaed assets from:https://ci.openmrs.org/browse/REFAPP-OMODDISTRO-9694
+
 ## Differences Between Production Images and SDK Images
 
 OpenMRS already provides non-production docker images here: https://hub.docker.com/r/openmrs/openmrs-reference-application-distro
