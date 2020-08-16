@@ -8,8 +8,7 @@ RUN mkdir -p /usr/local/tomcat/.OpenMRS \
     && unzip -d /tmp/ /tmp/refapp-addons.zip \
     && cp -r /tmp/referenceapplication-package-2.10.0-SNAPSHOT /usr/local/tomcat/.OpenMRS/ \
     && rm /tmp/refapp-addons.zip \
-    && rm /tmp/orderentry-1.1.0.zip \
-    && rm -rf /tmp/referenceapplication-package-2.9.0/ 
+    && rm -rf /tmp/referenceapplication-package-2.10.0-SNAPSHOT/ 
 
 COPY startup.sh /usr/local/tomcat/startup.sh
 COPY setenv.sh /usr/local/tomcat/bin/setenv.sh
