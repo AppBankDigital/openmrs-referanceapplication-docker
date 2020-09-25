@@ -33,6 +33,9 @@ do
     sleep 1
 done
 
+#report module fix for 2.11
+echo "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))" | docker exec -i safehandsdb /usr/bin/mysql -u root --password=password openmrs
+
 # Start tomcat in background
 /usr/local/tomcat/bin/catalina.sh run &
 
