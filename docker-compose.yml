@@ -2,7 +2,7 @@ version: '2'
 # For testing only
 services:
   db:
-    image: mysql:5.6
+    image: mysql:5.7
     container_name: safehandsdb
     command:
       - --character-set-server=utf8
