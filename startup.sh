@@ -1,13 +1,13 @@
 #!/bin/bash
 # Modified from https://github.com/openmrs/openmrs-sdk/
 
-# For runtime-setup actions only (i.e. actions that require access to runtime environment variables). 
+# For runtime-setup actions only (i.e. actions that require access to runtime environment variables).
 # Buildtime actions should go in the dockerfile.
 
-DB_CREATE_TABLES=${DB_CREATE_TABLES:-false}
+DB_CREATE_TABLES=${DB_CREATE_TABLES:-true}
 DB_AUTO_UPDATE=${DB_AUTO_UPDATE:-false}
 MODULE_WEB_ADMIN=${MODULE_WEB_ADMIN:-true}
-DEBUG=${DEBUG:-false}
+DEBUG=true
 
 cat > /usr/local/tomcat/openmrs-server.properties << EOF
 install_method=auto
@@ -33,8 +33,11 @@ do
     sleep 1
 done
 
-#report module fix for 2.11
-echo "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))" | docker exec -i safehandsdb /usr/bin/mysql -u root --password=password openmrs
+JAVA_OPTS="${OMRS_JAVA_SERVER_OPTS} ${OMRS_JAVA_MEMORY_OPTS}"
+
+cat > $TOMCAT_SETENV_FILE << EOF
+export JAVA_OPTS="$JAVA_OPTS"
+EOF
 
 # Start tomcat in background
 /usr/local/tomcat/bin/catalina.sh run &
