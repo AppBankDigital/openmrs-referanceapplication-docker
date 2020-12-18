@@ -53,4 +53,4 @@ The images provided here are different in that they are intended for production 
 
 ## Acknowledgements
 
-Most of this code is shamelessly stolen from @cintiadr and her work on the OpenMRS SDK docker images: https://github.com/openmrs/openmrs-sdk
+@cintiadr and her work on the OpenMRS SDK docker images: https://github.com/openmrs/openmrs-sdk
