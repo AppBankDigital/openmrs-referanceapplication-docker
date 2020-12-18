@@ -2,14 +2,17 @@ version: '2'
 # For testing only
 services:
   db:
-    image: mysql:5.6
+    image: mysql:5.7.31
+    container_name: safehandsdb
     command:
       - --character-set-server=utf8
       - --collation-server=utf8_general_ci
     environment:
       MYSQL_ROOT_PASSWORD: "password"
       MYSQL_DATABASE: "openmrs"
-
+    volumes:
+      - safehands-database:/var/lib/mysql
+    restart: unless-stopped
   refapp:
     depends_on:
       - db
@@ -23,8 +26,23 @@ services:
       DB_DATABASE: "openmrs"
       DB_USERNAME: "root"
       DB_PASSWORD: "password"
-      DB_CREATE_TABLES: "true"
+      DB_CREATE_TABLES: "true" # Note: has no effect if DB_CREATE_TABLES set to false
       DB_AUTO_UPDATE: "false"
-      MODULE_WEB_ADMIN: "false"
-      OPENMRS_ADMIN_PASSWORD: "MyCustomPassword123" # Note: has no effect if DB_CREATE_TABLES set to false
-      TZ: "America/New_York"
+      MODULE_WEB_ADMIN: "true"
+      OPENMRS_ADMIN_PASSWORD: "Safehands@123"
+      TZ: "America/Chicago"
+      # These environment variables are appended to configure the Tomcat JAVA_OPTS
+      OMRS_JAVA_MEMORY_OPTS: "-Xmx2048m -Xms1024m -XX:NewSize=128m"
+      OMRS_JAVA_SERVER_OPTS: "-Dfile.encoding=UTF-8 -server -Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Djava.awt.headlesslib=true"
+    volumes:
+      - document-upload:/usr/local/tomcat/.OpenMRS/Document
+    restart: unless-stopped
+
+volumes:
+  safehands-database:
+  document-upload:
+
+networks:
+ default:
+  external:
+    name: my-pre-existing-network
